@@ -1,5 +1,0 @@
-gcc -Wall -c matIO.c 
-gcc -Wall -c matAlg.c 
-ar rcs ./lib/libmatrix.a matIO.o matAlg.o
-gcc -o matops -Wall -L ./lib/ matops.c -lmatrix
-./matops
