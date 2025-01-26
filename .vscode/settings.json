@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "defs.h": "c",
+        "stdio.h": "c",
+        "matio.h": "c",
+        "matalg.h": "c"
+    }
+}
