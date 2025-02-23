@@ -1,0 +1,141 @@
+1. The input should be the last 5 digits of your roll number: 10005
+
+2. We need to:
+   - Find all factors of 10005
+   - For any factor > 1000 (excluding the number itself):
+     - If prime: Add 1 and find factors of that number
+     - If not prime: Find its factors
+   - Append all these to our list
+   - Print all factors except the number itself
+
+Let me create the program:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Function to check if a number is prime
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+// Function to find factors of a number
+void findFactors(int n, int* factors, int* count) {
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            // Add factor if it's not already in the list
+            bool exists = false;
+            for (int j = 0; j < *count; j++) {
+                if (factors[j] == i) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                factors[*count] = i;
+                (*count)++;
+            }
+            
+            // If factor > 1000 (excluding n itself) and not already processed
+            if (i > 1000 && i != n) {
+                if (isPrime(i)) {
+                    // If prime, add 1 and find factors of (i+1)
+                    findFactors(i + 1, factors, count);
+                } else {
+                    // If not prime, find its factors
+                    findFactors(i, factors, count);
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    int num = 10005;  // Last 5 digits of roll number
+    int* factors = (int*)malloc(10000 * sizeof(int));  // Array to store factors
+    int count = 0;
+    
+    printf("Finding factors for: %d\n", num);
+    findFactors(num, factors, &count);
+    
+    printf("Factors (excluding the number itself):\n");
+    for (int i = 0; i < count; i++) {
+        if (factors[i] != num) {
+            printf("%d", factors[i]);
+            if (i < count - 1) printf(", ");
+        }
+    }
+    printf("\n");
+    
+    free(factors);
+    return 0;
+}
+```
+
+This program will:
+1. Take 10005 as input (last 5 digits of your roll number)
+2. Find all its factors
+3. For any factor > 1000 (except 10005 itself):
+   - If it's prime, add 1 and find factors of that number
+   - If it's not prime, find its factors
+4. Print all unique factors (excluding 10005 itself)
+
+You can compile this with:
+```bash
+gcc -Wall -g yourrollno.c -o yourrollno
+```
+
+After running this program, you'll get a list of factors. You can then use the `checkZone` and `workingZone` executables provided to determine which factors are in the working zone (where they generate a value of n > 20 but < 50).
+
+Would you like me to help you run the program and analyze which factors fall in the working zone?
+
+
+Let me run and help analyze the output.
+
+From factoring 10005:
+The factors of 10005 are: 1, 3, 5, 15, 667, 2001, 3335, 10005
+
+Let's process this according to the rules:
+- For 2001 (>1000): Need to find its factors
+- For 3335 (>1000): Need to find its factors
+(We ignore 10005 as per instructions)
+
+2001 factors: 1, 3, 23, 29, 69, 87, 667, 2001
+3335 factors: 1, 5, 23, 29, 115, 145, 667, 3335
+
+Combining all unique factors (excluding 10005):
+1, 3, 5, 15, 23, 29, 69, 87, 115, 145, 667, 2001, 3335
+
+Now, let's test which of these factors (excluding single digit numbers) are in the working zone using the checkZone executable. We'll test each factor > 9.
+
+Let me test them one by one using `./checkZone`:
+
+```
+For 15:
+Enter your factor: 15
+[Testing...]
+
+For 23:
+Enter your factor: 23
+[Testing...]
+
+For 29:
+Enter your factor: 29
+[Testing...]
+
+[Continue testing remaining factors...]
+```
+
+Would you like me to test these factors with the checkZone executable to determine which ones are in the working zone? We'll need to test each factor to find which ones generate a value of n that's greater than 20 but less than 50.
+
+I can then help you:
+1. List all the factors that are in the working zone
+2. Help you select the last two factors from that list for profiling
+3. Guide you through generating the call graphs for those factors
+
+Shall I proceed with testing the factors?

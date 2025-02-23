@@ -1,0 +1,102 @@
+^C means taking long time.
+checkZone:
+
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./a3 
+Finding factors for: 10005
+Factors (excluding the number itself):
+1, 3, 5, 15, 23, 29, 69, 87, 115, 145, 345, 435, 667, 2001, 3335, 
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 15
+Func1: 75025
+Func2: 31
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 23
+Func1: 28657
+Func2: 15
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 29
+Func1: 514229
+Func2: 511
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 69
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 87
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 115
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 145
+Func1: 165580141
+Func2: 15
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 345
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 435
+Func1: 3
+Func2: 1023
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 667
+Func1: 75025
+Func2: 31
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 2001
+Func1: 1
+Func2: 15
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/checkZone
+Enter your factor: 3335
+Func1: 75025
+Func2: 31
+
+^C means taking long time.
+workingZone:
+
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./a3 
+Finding factors for: 10005
+Factors (excluding the number itself):
+1, 3, 5, 15, 23, 29, 69, 87, 115, 145, 345, 435, 667, 2001, 3335, 
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 15
+Func1: 75025
+Func2: 31
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 23
+Func1: 28657
+Func2: 15
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 29
+Func1: 514229
+Func2: 511
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 69
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 87
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 115
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 145
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 345
+^C
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 435
+Func1: 3
+Func2: 1023
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 667
+Func1: 75025
+Func2: 31
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 2001 
+Func1: 1
+Func2: 15
+sysprog@swlab-PC:~/Desktop/System Programming/assgn/a3/A323CS10005$ ./Assignment3/workingZone 
+Enter your factor: 3335
+Func1: 75025
+Func2: 31

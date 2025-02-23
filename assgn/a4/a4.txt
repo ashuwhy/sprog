@@ -1,0 +1,155 @@
+I'll help you analyze this code and solve the assignment. Let me break this down step by step.
+
+### Analysis of Memory Leaks in list.c
+
+1. Code Analysis:
+- The code implements a doubly-linked circular list with a sentinel node (head)
+- Elements are added in descending order
+- The head node contains -10 as sentinel value
+- Main function inserts n = (10 + roll%10) elements, where each element is (roll*3 + 2*i)
+- Deletion happens in the same order as insertion
+
+2. Memory Management Issues:
+- In deleteList(), when deleting the first node (curr->left->data < 0), there's no free() call
+- This causes memory leak for the first node deletion
+- Line 71-73 is the problematic section:
+```c
+if (curr->left->data < 0) {
+    head = curr->right;
+    curr->right->left = curr->left;
+}
+```
+
+3. Minimum Leak Order Pattern:
+- To minimize leaks, delete from the smallest to largest number
+- This ensures only one node (the first deleted node) leaks memory
+- General pattern: Delete in ascending order instead of the default insertion order
+
+4. Solution Approach:
+- Add free(curr) in the first condition of deleteList()
+- No other major changes needed
+- This will fix memory leaks regardless of deletion order
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node *left;
+    struct node *right;
+} NODE;
+
+void initList(NODE **head)
+{
+    (*head) = (NODE *)malloc(sizeof(NODE));
+    (*head)->data = -10;
+    (*head)->right = (*head)->left = (*head);
+}
+
+NODE *insertList(NODE *head, int x) {
+    NODE *newNode, *temp, *curr;
+
+    newNode =  (NODE *)malloc(sizeof(NODE));
+    newNode->data = x;
+    newNode->left = newNode->right = NULL;
+
+    if(head->data < 0) {
+        temp = newNode;
+        head->right = head->left = temp;
+        temp->left = temp->right = head;
+        return temp;
+    }
+
+    if (x <= head->data) {
+        newNode->right = head;
+        newNode->left = head->left;
+        head->left = newNode;
+        return newNode;
+    }
+
+    curr = head;
+    while (curr->right->data > 0  && curr->right->data < x) {
+        curr = curr->right;
+    }
+
+    newNode->right = curr->right;
+    curr->right->left = newNode;
+    curr->right = newNode;
+    newNode->left = curr;
+    return head;
+}
+
+NODE *deleteList(NODE *head, int x)
+{
+    NODE *curr = head;
+    while (curr->data > 0) {
+        if (curr->data == x) break;
+        curr = curr->right;
+    }
+    if (curr->data < 0) return head;
+
+    // Beginning of change done
+    if (curr->left->data < 0) {
+        head = curr->right;
+        curr->right->left = curr->left;
+        free(curr);  // Added this line to fix memory leak
+    }
+    // End of change done
+    else {
+        if (curr->right->data < 0){
+            curr->left->right = curr->right;
+            curr->right->left = curr->left;
+        }
+        else {
+            curr->left->right = curr->right;
+            curr->right->left = curr->left;
+        }
+        free(curr);
+    }
+    return(head);
+}   
+
+void printList(NODE *curr) {
+    NODE *start = curr;
+    printf("\nThe contents of the list (in descending order) is: \n");
+    if (curr->data < 0) return;
+    curr=curr->left->left;
+    while (curr != start) {
+        printf("%d  ", curr->data);
+        curr = curr->left;
+    }   
+    printf("%d  ", curr->data);
+    printf("\n");
+}
+
+int main() {
+    NODE *head;
+    int roll, n, i, x;
+    initList(&head);
+    printf("Enter last 5 digits of your roll no: ");
+    scanf("%d", &roll);
+    n = 10 + roll%10;
+    for (i=0; i<n; i++) {
+        head = insertList(head, roll*3 + 2*i);
+    }
+    printList(head);
+    for (i=0; i<n; i++) {
+        head = deleteList(head, roll*3 + 2*i);
+    }
+
+    return 0;
+}
+
+To answer the specific questions from the assignment:
+
+(a) The exact number of bytes leaked will depend on the roll number used, but each leaked block will be sizeof(NODE) bytes (typically 24 bytes on most systems). The type is "definitely lost" memory in Valgrind's terminology.
+
+(b) A "block" in the Valgrind output refers to a contiguous chunk of memory allocated using malloc() or similar functions.
+
+(c) For minimum leaks, delete the elements in ascending order (from smallest to largest). For example, if your elements are [15, 13, 11], delete in order [11, 13, 15]. The general pattern is: "Delete elements in ascending order (smallest to largest) to minimize memory leaks."
+
+(d) The memory leak occurs in the deleteList() function around line 71-73 when deleting the first node (when curr->left->data < 0). In this case, the node is unlinked from the list but never freed, causing a memory leak. The subsequent deletions work correctly because they include the free(curr) call.
+
+The fix in mylist.c adds a single free(curr) call in the first condition of deleteList(), which ensures all nodes are properly freed regardless of deletion order. The change is minimal but crucial for proper memory management.
+
+Would you like me to explain any part of the analysis or solution in more detail?
